@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace ChatWebClient
@@ -16,17 +12,43 @@ namespace ChatWebClient
             routes.MapRoute(
                 name: "Home",
                 url: "",
-                defaults: new { controller = "Home", action = "Index"}
+                defaults: new { controller = "Home", action = "Index" }
             );
-            routes.MapRoute(
-                name: "Login",
-                url: "login",
-                defaults: new { controller = "Auth", action = "login" }
-            );
+
+			routes.MapRoute(
+				name: "Login",
+				url: "login",
+				defaults: new { controller = "Auth", action = "Login" }
+			);
+
             routes.MapRoute(
                 name: "ChatRoom",
-                url: "client",
-                defaults: new { controller = "chat", action = "Index" }
+                url: "chat",
+                defaults: new { controller = "Chat", action="Index"}
+            );
+
+            routes.MapRoute(
+                name: "GetContactConversations",
+                url:  "contact/conversations/{contact}",
+                defaults: new { controller = "Chat", action="ConversationWithContact", contact="" }
+            );
+
+            routes.MapRoute(
+                name: "PusherAuth",
+                url:  "pusher/auth",
+                defaults: new { controller = "Auth", action = "AuthForChannel"}
+            );
+
+			routes.MapRoute(
+				name: "SendMessage",
+                url: "send_message",
+                defaults: new { controller = "Chat", action = "SendMessage" }
+			);
+
+            routes.MapRoute(
+                name: "MessageDelivered",
+                url: "message_delivered/{message_id}",
+                defaults: new { controller="Chat", action="MessageDelivered", message_id = ""}
             );
         }
     }
